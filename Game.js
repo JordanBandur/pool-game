@@ -16,8 +16,8 @@ Game.prototype.init = function () {
 // Method to start the game
 Game.prototype.start = function () {
 
-  this.init();
-  this.mainLoop();
+  PoolGame.init();
+  PoolGame.mainLoop();
 };
 
 // Method for the main game loop
