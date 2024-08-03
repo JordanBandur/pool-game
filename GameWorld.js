@@ -3,13 +3,16 @@
 
 function GameWorld() {
 
+  this.poolCue = new PoolCue();
 }
 
 GameWorld.prototype.update = function () {
-
+  this.poolCue.update();
 };
 
 GameWorld.prototype.draw = function () {
 
   Canvas.drawImage(sprites.background, { x: 0, y: 0 });
+
+  this.poolCue.draw();
 };
