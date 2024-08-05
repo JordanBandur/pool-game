@@ -1,10 +1,14 @@
-function PoolCue() {
-  this.position = { x: 0, y: 400 };
+const STICK_ORIGIN = new Vector2(970, 11);
+
+function PoolCue(position) {
+
+  this.position = position;
 }
 
 PoolCue.prototype.update = function () {
+
 };
 
 PoolCue.prototype.draw = function () {
-  Canvas.drawImage(sprites.poolCue, this.position);
+  Canvas.drawImage(sprites.poolCue, this.position, STICK_ORIGIN);
 };
