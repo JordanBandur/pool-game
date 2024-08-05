@@ -4,10 +4,13 @@
 function GameWorld() {
 
   this.poolCue = new PoolCue();
+  this.cueBall = new Ball(new Vector2(413, 413));
 }
 
 GameWorld.prototype.update = function () {
+
   this.poolCue.update();
+  this.cueBall.update();
 };
 
 GameWorld.prototype.draw = function () {
@@ -15,4 +18,5 @@ GameWorld.prototype.draw = function () {
   Canvas.drawImage(sprites.background, { x: 0, y: 0 });
 
   this.poolCue.draw();
+  this.cueBall.draw();
 };
