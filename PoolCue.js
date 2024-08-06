@@ -1,4 +1,5 @@
 const STICK_ORIGIN = new Vector2(970, 11);
+const STICK_SHOT_ORIGIN = new Vector2(950, 11);
 
 function PoolCue(position) {
 
@@ -40,4 +41,6 @@ PoolCue.prototype.increasePower = function () {
 
 PoolCue.prototype.shoot = function () {
   this.onShoot(this.power, this.draw.rotation);
+  this.power = 0;
+  this.origin = STICK_SHOT_ORIGIN.copy();
 };
