@@ -16,7 +16,7 @@ Canvas2D.prototype.clear = function () {
 };
 
 // Method to draw an image on the canvas at a specific position
-Canvas2D.prototype.drawImage = function (image, position, origin) {
+Canvas2D.prototype.drawImage = function (image, position, origin, rotation = 0) {
 
   if (!position) {
     position = new Vector2();
@@ -28,6 +28,7 @@ Canvas2D.prototype.drawImage = function (image, position, origin) {
 
   this._canvasContext.save();
   this._canvasContext.translate(position.x, position.y);
+  this._canvasContext.rotation(rotation);
   // Draw the image at the specified x and y coordinates
   this._canvasContext.drawImage(image, -origin.x, -origin.y);
   this._canvasContext.restore();
