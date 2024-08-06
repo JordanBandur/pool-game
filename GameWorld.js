@@ -1,5 +1,6 @@
 // This is resonsible for a the all the 'physical' items in the game. For each frame of animation
 // this will be responsible to update the items and draw them on the canvas.
+
 const DELTA = 1 / 100; // The amount to update on each iteration
 
 function GameWorld() {
@@ -14,6 +15,10 @@ GameWorld.prototype.update = function () {
 
   this.poolCue.update();
   this.cueBall.update(DELTA);
+
+  if (!this.ballIsMoving && this.poolCue.shot) {
+    this.poolCue.reposition(this.cueBall.position);
+  }
 };
 
 GameWorld.prototype.draw = function () {
@@ -22,4 +27,8 @@ GameWorld.prototype.draw = function () {
 
   this.poolCue.draw();
   this.cueBall.draw();
+};
+
+GameWorld.prototype.ballIsMoving = function () {
+  return this.cueBall.moving;
 };
