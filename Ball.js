@@ -7,6 +7,8 @@ function Ball(position) {
 
 Ball.prototype.update = function (delta) {
   this.position.addTo(this.velocity.mult(delta));
+
+  this.velocity = this.velocity.mult(0.98);
 };
 
 Ball.prototype.draw = function () {
