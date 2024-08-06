@@ -37,3 +37,7 @@ PoolCue.prototype.increasePower = function () {
   this.power += 100;
   this.origin.x += 5;
 };
+
+PoolCue.prototype.shoot = function () {
+  this.onShoot(this.power, this.draw.rotation);
+};
