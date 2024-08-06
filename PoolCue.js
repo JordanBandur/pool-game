@@ -12,7 +12,7 @@ PoolCue.prototype.update = function () {
 };
 
 PoolCue.prototype.draw = function () {
-  Canvas.drawImage(sprites.poolCue, this.position, STICK_ORIGIN);
+  Canvas.drawImage(sprites.poolCue, this.position, STICK_ORIGIN, this.rotation);
 };
 
 PoolCue.prototype.updateRotation = function () {
