@@ -4,7 +4,7 @@
 function GameWorld() {
 
   this.poolCue = new PoolCue(new Vector2(413, 413));
-  this.cueBall = new Ball(new Vector2(413, 413));
+  this.cueBall = new Ball(new Vector2(413, 413), this.cueBall.shoot);
 }
 
 GameWorld.prototype.update = function () {
