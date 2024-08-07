@@ -5,10 +5,10 @@ const DELTA = 1 / 100; // The amount to update on each iteration
 
 function GameWorld() {
 
-  this.poolCue = new PoolCue(new Vector2(413, 413));
-  this.cueBall = new Ball(
+  this.cueBall = new Ball(new Vector2(413, 413), COLOR.WHITE);
+  this.poolCue = new PoolCue(
     new Vector2(413, 413),
-    this.cueBall.shoot.bind(this.cueBall));
+    this.poolCue.shoot.bind(this.cueBall));
 }
 
 GameWorld.prototype.update = function () {
