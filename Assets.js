@@ -33,6 +33,9 @@ function loadAssets(callback) {
   sprites.background = loadSprite('spr_background.png');
   sprites.poolCue = loadSprite('spr_stick.png');
   sprites.cueBall = loadSprite('spr_whiteBall.png');
+  sprites.redBall = loadSprite('spr_redBall.png');
+  sprites.yellowBall = loadSprite('spr_yellowBall.png');
+  sprites.blackBall = loadSprite('spr_blackBall.png');
 
   // Start checking if all assets are loaded
   assetsLoadingLoop(callback);
