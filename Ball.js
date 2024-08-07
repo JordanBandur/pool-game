@@ -1,9 +1,10 @@
 const BALL_ORIGIN = new Vector2(25, 25);
 
-function Ball(position) {
+function Ball(position, color) {
   this.position = position;
   this.velocity = new Vector2();
   this.moving = false;
+  this.sprite = getBallSpriteByColor(color);
 }
 
 Ball.prototype.update = function (delta) {
@@ -20,7 +21,7 @@ Ball.prototype.update = function (delta) {
 
 Ball.prototype.draw = function () {
 
-  Canvas.drawImage(sprites.cueBall, this.position, BALL_ORIGIN);
+  Canvas.drawImage(this.sprite, this.position, BALL_ORIGIN);
 };
 
 Ball.prototype.shoot = function (power, rotation) {
