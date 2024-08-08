@@ -28,6 +28,16 @@ function GameWorld() {
     this.poolCue.shoot.bind(this.cueBall));
 }
 
+GameWorld.prototype.handleCollisions = function () {
+  for (let i = 0; i < this.poolBalls.length; i++) {
+    for (let j = i; j < this.ballIsMoving.length; j++) {
+      const firstBall = this.poolBalls[i];
+      const secondBall = this.poolBalls[j];
+      firstBall.collideWith(secondBall);
+    }
+  }
+};
+
 GameWorld.prototype.update = function () {
 
   this.handleCollisions();
