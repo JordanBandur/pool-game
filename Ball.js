@@ -44,6 +44,13 @@ Ball.prototype.collideWith = function (ball) {
     return;
   }
 
+  // Find the minimum translation distance
+  const mtd = n.mult((BALL_DIAMETER - dist) / dist)
+
+  // Prevent pool balls from sticking together
+  this.position = this.position.add(mtd.mult(1/2));
+  ball.position = ball.position.subtract(mtd.mult(1/2));
+
   // Find the unit normal vector
   const un = n.mult(1 / n.length);
 
