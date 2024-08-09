@@ -1,4 +1,5 @@
 const BALL_ORIGIN = new Vector2(25, 25);
+const BALL_DIAMETER = 38;
 
 function Ball(position, color) {
   this.position = position;
@@ -28,4 +29,47 @@ Ball.prototype.shoot = function (power, rotation) {
 
   this.velocity = new Vector2(power * Math.cos(rotation), power * Math.sign(rotation));
   this.moving = true;
+};
+
+// Used the following article for creating elastic collision:
+// https://www.vobarian.com/collisions/2dcollisions2.pdf
+Ball.prototype.collideWith = function (ball) {
+  // Find a normal vector
+  const n = this.position.subtract(ball.position);
+
+  // Find distance
+  const dist = n.length();
+
+  if (dist < BALL_DIAMETER) {
+    return;
+  }
+
+  // Find the unit normal vector
+  const un = n.mult(1 / n.length);
+
+  // Find the unit tangent vector
+  const ut = new Vector2(-un.y, un.x);
+
+  // Project velocities onto the unit normal and tangent vectors
+  const v1n = un.dot(this.velocity);
+  const v1t = ut.dot(this.velocity);
+  const v2n = un.dot(ball.velocity);
+  const v2t = ut.dot(ball.velocity);
+
+  // Find new normal velocities
+  let v1nTag = v2n;
+  let v2nTag = v1n;
+
+  // Convert scalar normal and tangential velocities into vectors
+  v1nTag = un.mult(v1nTag);
+  const v1tTag = ut.mult(v1t);
+  v2nTag = un.mult(v2nTag);
+  const v2tTag = ut.mult(v2t);
+
+  // Update velocities
+  this.velocity = v1nTag.add(v1tTag);
+  ball.velocity = v2nTag.add(v2tTag);
+
+  this.moving = true;
+  ball.moving = true;
 };
