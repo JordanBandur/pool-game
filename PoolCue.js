@@ -1,5 +1,6 @@
 const POOLCUE_ORIGIN = new Vector2(970, 11);
 const POOLCUE_SHOT_ORIGIN = new Vector2(950, 11);
+const MAX_POWER = 7500;
 
 function PoolCue(position) {
 
@@ -36,7 +37,11 @@ PoolCue.prototype.updateRotation = function () {
 };
 
 PoolCue.prototype.increasePower = function () {
-  this.power += 100;
+  if (this.power > MAX_POWER) {
+    return;
+  }
+
+  this.power += 120;
   this.origin.x += 5;
 };
 
