@@ -1,5 +1,6 @@
 const BALL_ORIGIN = new Vector2(25, 25);
 const BALL_DIAMETER = 38;
+const BALL_RADIUS = BALL_DIAMETER / 2;
 
 function Ball(position, color) {
   this.position = position;
@@ -12,6 +13,7 @@ Ball.prototype.update = function (delta) {
 
   this.position.addTo(this.velocity.mult(delta));
 
+  // Apply friction
   this.velocity = this.velocity.mult(0.98);
 
   if (this.velocity.length() < 5) {
@@ -33,7 +35,8 @@ Ball.prototype.shoot = function (power, rotation) {
 
 // Used the following article for creating elastic collision:
 // https://www.vobarian.com/collisions/2dcollisions2.pdf
-Ball.prototype.collideWith = function (ball) {
+Ball.prototype.collideWithBall = function (ball) {
+
   // Find a normal vector
   const n = this.position.subtract(ball.position);
 
@@ -45,11 +48,11 @@ Ball.prototype.collideWith = function (ball) {
   }
 
   // Find the minimum translation distance
-  const mtd = n.mult((BALL_DIAMETER - dist) / dist)
+  const mtd = n.mult((BALL_DIAMETER - dist) / dist);
 
   // Prevent pool balls from sticking together
-  this.position = this.position.add(mtd.mult(1/2));
-  ball.position = ball.position.subtract(mtd.mult(1/2));
+  this.position = this.position.add(mtd.mult(1 / 2));
+  ball.position = ball.position.subtract(mtd.mult(1 / 2));
 
   // Find the unit normal vector
   const un = n.mult(1 / n.length);
@@ -79,4 +82,50 @@ Ball.prototype.collideWith = function (ball) {
 
   this.moving = true;
   ball.moving = true;
+
+};
+
+Ball.prototype.collideWithTable = function (table) {
+  if (!this.moving) {
+    return;
+  }
+
+  let collided = false;
+
+  // Add collisions to the pool table borders
+  if (this.position.y <= table.TopY + BALL_RADIUS) {
+    this.velocity = new Vector2(this.velocity.x, -this.velocity.y);
+    collided = true;
+  }
+
+  if (this.position.x >= table.RightX - BALL_RADIUS) {
+    this.velocity = new Vector2(-this.velocity.x, this.velocity.y);
+    collided = true;
+  }
+
+  if (this.position.y >= table.BottomY - BALL_RADIUS) {
+    this.velocity = new Vector2(this.velocity.x, -this.velocity.y);
+    collided = true;
+  }
+
+  if (this.position.x <= table.LeftX + BALL_RADIUS) {
+    this.velocity = new Vector2(-this.velocity.x, this.velocity.y);
+    collided = true;
+  }
+
+  // Simulate energy loss
+  if (collided) {
+    this.velocity = this.velocity.mult(0.98);
+  }
+};
+
+
+Ball.prototype.collideWith = function (object) {
+
+  if (object instanceof Ball) {
+    this.collideWithBall(object);
+  }
+  else {
+    this.collideWithTable(object);
+  }
 };
