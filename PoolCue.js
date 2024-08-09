@@ -50,4 +50,5 @@ PoolCue.prototype.shoot = function () {
 PoolCue.prototype.reposition = function (position) {
   this.position = position.copy();
   this.origin = POOLCUE_ORIGIN.copy();
+  this.shot = false;
 };
