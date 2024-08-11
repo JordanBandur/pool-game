@@ -14,6 +14,10 @@ function PoolCue(position) {
 
 PoolCue.prototype.update = function () {
 
+  if (this.shot) {
+    return;
+  }
+
   if (Mouse.left.down) {
     this.increasePower();
   } else {
