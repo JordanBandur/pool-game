@@ -25,5 +25,11 @@ const CONSTANTS = {
   poolCueOrigin: new Vector2(970, 11),
   poolCueShotOrigin: new Vector2(950, 11),
 
-  ballOrigin: new Vector2(25, 25)
+  // Ball
+  ballOrigin: new Vector2(25, 25),
+  ballDiameter: 38,
+  ballRadius: 19,
+  minVelocityLength: 5,
+  frictionEnergyLoss: 0.016,
+  collisionEnergyLoss: 0.02,
 };
