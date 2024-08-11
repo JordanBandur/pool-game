@@ -14,5 +14,16 @@ const CONSTANTS = {
     new Ball(new Vector2(1126, 433), COLOR.YELLOW),//9
     new Ball(new Vector2(1162, 413), COLOR.YELLOW),//13
     new Ball(new Vector2(1162, 491), COLOR.YELLOW)//15
-  ]
+  ],
+
+  delta: 1 / 177,
+
+  // PoolCue
+  maxPower: 8000,
+  powerInterval: 120,
+  originXInterval: 5,
+  poolCueOrigin: new Vector2(970, 11),
+  poolCueShotOrigin: new Vector2(950, 11),
+
+  ballOrigin: new Vector2(25, 25)
 };
