@@ -91,6 +91,24 @@ Ball.prototype.collideWithBall = function (ball) {
 
 };
 
+Ball.prototype.handleBallInPocket = function () {
+
+  if (!this.visible) {
+    return;
+  }
+
+  let inPocket = CONSTANTS.pockets.some(pocket => {
+    return this.position.distFrom(pocket) < CONSTANTS.pocketRadius;
+  });
+
+  if (!inPocket) {
+    return;
+  }
+
+  this.visible = false;
+  this.moving = false;
+};
+
 Ball.prototype.collideWithTable = function (table) {
   if (!this.moving) {
     return;
