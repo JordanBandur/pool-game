@@ -1,12 +1,7 @@
-const POOLCUE_ORIGIN = new Vector2(970, 11);
-const POOLCUE_SHOT_ORIGIN = new Vector2(950, 11);
-const MAX_POWER = 7500;
-
 function PoolCue(position) {
-
   this.position = position;
   this.rotation = 0;
-  this.origin = POOLCUE_ORIGIN.copy();
+  this.origin = CONSTANTS.poolCueOrigin.copy();
   this.power = 0;
   this.onShoot = onShoot;
   this.shot = false;
@@ -41,23 +36,23 @@ PoolCue.prototype.updateRotation = function () {
 };
 
 PoolCue.prototype.increasePower = function () {
-  if (this.power > MAX_POWER) {
+  if (this.power > CONSTANTS.maxPower) {
     return;
   }
 
-  this.power += 120;
-  this.origin.x += 5;
+  this.power += CONSTANTS.powerInterval;
+  this.origin.x += CONSTANTS.originXInterval;
 };
 
 PoolCue.prototype.shoot = function () {
   this.onShoot(this.power, this.draw.rotation);
   this.power = 0;
-  this.origin = POOLCUE_SHOT_ORIGIN.copy();
+  this.origin = CONSTANTS.poolCueShotOrigin.copy();
   this.shot = true;
 };
 
 PoolCue.prototype.reposition = function (position) {
   this.position = position.copy();
-  this.origin = POOLCUE_ORIGIN.copy();
+  this.origin = CONSTANTS.poolCueOrigin.copy();
   this.shot = false;
 };
